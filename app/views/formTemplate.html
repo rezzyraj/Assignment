@@ -1,0 +1,86 @@
+<form novalidate name="productForm">
+<div class="form-group col-md-7" style="margin-left:15px; margin-bottom:0px" ng-show="homeForm">
+<input type="text" class="form-control" name="Product Id"  ng-model= "formData.productSearch"  placeholder="search product by name" ng-keyup="$event.keyCode == 13 && searchAndSelectProduct(formData.productSearch)"/>
+<br/>
+<div class="search-item-box col-md-11" ng-class="{'hide': !showSearchResult}" >
+  <div  ng-repeat="product in formData.products" >
+    <p class="item" ng-click="selectProduct(product)">{{product.product_name}}</p>
+  </div>
+</div>
+</div>
+
+<div style="height:20px; padding-left: 30px" class=" form-group col-md-12">
+<span ng-show="message.info != ''" style="color:green">{{message.info}}</span>
+<span ng-show="message.error != ''" style="color:red">{{message.error}}</span>
+</div>
+            <div class="form-group col-md-12" >
+                <label class="col-md-3 control-label">Product Id</label>
+                <div class="col-md-5">
+                    <input type="text" class="form-control" required name="Product_Id" ng-model="formData.product.id" ng-disabled="homeForm" />
+                </div>
+				<div class="col-md-4">
+					<span style="color:red" ng-show="productForm.Product_Id.$dirty && productForm.Product_Id.$invalid">
+					<span ng-show="productForm.Product_Id.$error.required">Product Id is required.</span>
+					</span>
+                </div>
+            </div>
+
+            <div class="form-group col-md-12">
+                <label class="col-md-3 control-label">Quantity</label>
+                <div class="col-md-5">
+                    <input type="number" min="0" max="999999999" class="form-control" required name="Quantity" ng-model="formData.product.units" ng-disabled="homeForm"/>
+                </div>
+				 <div class="col-md-4">
+					<span style="color:red" ng-show="productForm.Quantity.$dirty && productForm.Quantity.$invalid">
+					<span ng-show="productForm.Quantity.$error.required">Quantity is required.</span>
+					<span class="error" ng-show="productForm.Quantity.$error.number">Please enter number only.</span>
+					</span>
+                </div>
+            </div>
+
+            <div class="form-group col-md-12">
+                <label class="col-md-3 control-label">Product Name</label>
+                <div class="col-md-5">
+                   <input type="text" class="form-control"  ng-pattern="/^([a-zA-Z0-9 ]+)$/" required name="Product_Name" ng-model="formData.product.name" ng-keyup="homeForm && $event.keyCode == 13 && updateProduct()"/>
+                </div>
+				 <div class="col-md-4">
+					<span style="color:red" ng-show="productForm.Product_Name.$dirty && productForm.Product_Name.$invalid">
+					<span ng-show="productForm.Product_Name.$error.required">Product Name is required.</span>
+					<span ng-show="productForm.Product_Name.$error.pattern">Only letter and number allowed.</span>
+					</span>
+                </div>
+            </div>
+			
+			<div class="form-group col-md-12">
+                <label class="col-md-3 control-label">Cost Price</label>
+                <div class="col-md-5">
+                   <input type="number" min="0" max="999999999" class="form-control" required name="Cost_Price" ng-model="formData.product.cost" ng-disabled="homeForm"/>
+                </div>
+				 <div class="col-md-4">
+					<span style="color:red" ng-show="productForm.Cost_Price.$dirty && productForm.Cost_Price.$invalid">
+					<span ng-show="productForm.Cost_Price.$error.required">Cost price is required.</span>
+					<span class="error" ng-show="productForm.Cost_Price.$error.number">Please enter number only.</span>
+					</span>
+                </div>
+            </div>
+			
+			<div class="form-group col-md-12">
+                <label class="col-md-3 control-label">Selling Price</label>
+                <div class="col-md-5">
+                   <input type="number" min="0" max="999999999" class="form-control" required name="Selling_Price" ng-model="formData.product.sellingPrice" ng-keyup="homeForm && $event.keyCode == 13 && updateProduct()"/>
+                </div>
+					<div class="col-md-4">
+					<span style="color:red" ng-show="productForm.Selling_Price.$dirty && productForm.Selling_Price.$invalid">
+					<span ng-show="productForm.Selling_Price.$error.required">Selling price is required.</span>
+					<span class="error" ng-show="productForm.Selling_Price.$error.number">Please enter number only.</span>
+					</span>
+                </div>
+            </div>
+			<div class="form-group col-md-3" style="float:right" ng-show="!homeForm">
+			<input type="button" class="btn btn-primary" ng-disabled="productForm.$invalid" ng-click="addProduct()" value="Save"></input>
+			</div>
+			<div class="form-group col-md-7" style="float:right" ng-show="homeForm && (formData.product.id != '')">
+			<span style="color:green">Please press ENTER to update the product details.</span>
+			<div>
+</form>
+

@@ -1,0 +1,13 @@
+<div style="margin-top:50px">
+<ul class="nav nav-pills">
+  <li ng-class="{'active':selectedTab=='HOME'}"><a href="#planDetails" ng-click="selectTab('HOME');">HOME</a></li>
+  <li ng-class="{'active':selectedTab=='EDIT'}"><a href="#editPlanDetails" ng-click="selectTab('EDIT');" >EDIT</a></li>
+</ul>
+<div ng-show="selectedTab=='HOME'" class="tab-pane" id="planDetails" style="padding-top:50px; height:420px; background-color: lavender; padding-left: 10px;">
+<home-form-template> </home-form-template>
+</div>
+
+<div ng-show="selectedTab=='EDIT'" class="tab-pane" id="editPlanDetails" style="padding-top:50px; height:420px; background-color: lavender">
+<home-form-template> </home-form-template>
+</div>
+</div>
